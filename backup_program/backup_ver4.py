@@ -1,4 +1,6 @@
-import os, time
+import os, time,zipfile
+
+
 
 source = ['/home/luis/Desktop/backup_test']
 
@@ -29,7 +31,17 @@ zip_command = 'zip -r {0} {1}'.format(target,
 print('Zip command is:')
 print(zip_command)
 print('Running:')
-if os.system(zip_command) == 0:
-    print('Successful backup to', target)
-else:
-    print('Backup FAILED')
+
+with zipfile.ZipFile(target, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    for root, dirs, files in os.walk(source[0]):
+        print('root', root)
+        print('dirs', dirs)
+        print('files', files)
+        for file in files:
+            zipf.write(os.path.join(root, file), 
+                        os.path.relpath(os.path.join(root, file), 
+                                        os.path.join(source[0], '..')))
+
+
+
+print('Successful backup to', target)
