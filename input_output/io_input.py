@@ -11,6 +11,6 @@ def is_palindrome(something):
 
 something = input('Enter something: ')
 if is_palindrome(remove_symbols(something)):
-    print('Yes, it is palindrome', remove_symbols(something), ' ', reverse(something))
+    print('Yes, it is palindrome')
 else:
-    print('No, it isn\'t palindrome', something.translate(str.maketrans('','',string.punctuation)).replace(' ','').lower(), ' ', reverse(something))
+    print('No, it isn\'t palindrome')
